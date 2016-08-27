@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闭包2</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//js没有块级作用域({}里面的内容)
+		// var i=10;
+		// if(i>1){
+		// 	var name="aaaa";//全局作用域
+		// }
+
+		// console.log(name);
+		
+		// var a=10;
+		// function fn(){
+		// 	var b=20;
+		// 	function bar(){
+		// 		console.log(a+b);
+		// 	}
+		// 	return bar;
+		// }
+
+		// var x=fn(),//即function bar(){console.log(10+20)}
+		// 	b=200;
+		// }
+
+		// x();//在全局环境下创建的，所以是全局变量a=10；b是在fn函数下创建的是局部的，通过return函数返回出结果
+		//闭包是函数作为返回值，函数作为参数传递
+		//例一,函数作为返回值，赋值给变量
+		
+		// function f(){
+		// 	var max=10;
+		// 	return function bar(x){
+		// 		if(x>max){
+		// 			console.log(x);
+		// 		}
+		// 	}
+		// }
+
+		// var f1=f();
+		// f1(12);
+
+		var max=10,//全局变量
+			fn=function(x){
+				if(x>max){
+					console.log(x)
+				}
+			};
+
+			(function(f){//f为参数传入
+				var max=100;
+				f(12);//给函数传参，此时fn(12);全局变量
+			})(fn);//自运行函数,用一个变量来引用函数fn()
+
+		//执行顺序：从上而下，(function(f){})(fn)函数先执行，下来是fn函数作为活动体压栈，输出结果是是12，f(12)执行完后退出销毁，就剩下全局的(function(f){f(12)})(fn)
+	</script>
+</body>
+</html>

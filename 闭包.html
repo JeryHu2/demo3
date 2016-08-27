@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闭包</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// function show(x){
+		// 	//以下四种是按值传递类型，也是简单的值类型
+		// 	console.log(typeof x);//undefined
+		// 	console.log(typeof 10);//number
+		// 	console.log(typeof "abc");//string
+		// 	console.log(typeof true);//boolean
+
+		// 	//以下四种的输出结果是对象，因此都是按引用传递，而非按值传递
+		// 	console.log((function(){}) instanceof Object);//function true
+		// 	console.log(([1,'a',true]) instanceof  Object);//object true
+		// 	console.log(({a:10,b:20}) instanceof Object);//object true
+		// 	console.log(null instanceof Object);//object false
+		// 	console.log((new Number(10)) instanceof Object)//object true
+		// 	console.log(undefined typeof Object)//undefined false
+		// }
+
+		// show();
+
+		// //值传递可以使用typeof来检测，引用传递需要用instanceof来检测
+	
+		// var obj={
+		// 	a:10,
+		// 	b:function(x){
+		// 		alert(this.a+x);
+		// 	},
+		// 	c:{
+		// 		name:'xiaohuzi',
+		// 		age:26
+		// 	}
+		// }
+		//对象都是由函数构建的
+		 // var obj = new Object();
+	  //       obj.a = 10;
+	  //       obj.b = 20;
+
+	  //    var arr = new Array();
+	  //       arr[0] = 5;
+	  //       arr[1] = 'x';
+	  //       arr[2] = true;
+
+	  //       console.log(Object);
+	  //       console.log(Array);
+	  
+	 // var arr=[1,2,true];
+	  //console.log(typeof arr.toString());//string
+		
+	// document.write(isFinite(123)+ "<br />")//true
+	// document.write(isFinite(-1.23)+ "<br />")//true
+	// document.write(isFinite(5-2)+ "<br />")//true
+	// document.write(isFinite(0)+ "<br />")//true
+	// document.write(isFinite("Hello")+ "<br />")//false
+	// document.write(isFinite("2005/12/12")+ "<br />")//false
+	
+	//1、console.log(a);//未定义时会报错a is not defined
+	//2、 var a;
+	// console.log(a);undefined,无结果
+
+	// 3、console.log(a);结果仍是undefined，执行顺序是从上而下
+	// var a=10;
+	
+	// console.log(f1);//有var的时候，执行时从上而下找到声明再找赋值
+	// var f1=function(){};
+
+	// console.log(f2);
+	// function f2(){}
+	// 变量、变量函数都是先准备undefined；
+	// this在声明时已有赋值；
+	// function函数声明时已有赋值；
+	
+	// eval(alert("123"))
+	
+	// var a=10;
+	// function fn(){
+	// 	console.log(a);
+	// }
+
+	// function bar(f){
+	// 	var a=20;
+	// 	f();//function fn(){
+	// // 	console.log(a);
+	// // } 10
+	// }
+	// bar(fn);//window调用函数全局作用域，故结果是10；
+	// 
+	 // var obj={
+	 // 	x:10,
+	 // 	fn:function(){
+	 // 		console.log(this);//window对象
+	 // 		console.log(this.x);//undefined
+	 // 	}
+	 // }
+
+	 // var fn1=obj.fn;//变量引用，undefined
+	 // fn1.call(obj);//window调用
+	 
+	 //  var obj={
+	 // 	x:10,
+	 // 	fn:function(){
+	 // 		console.log(this);//obj本身
+	 // 		console.log(this.x);//10
+	 // 	}
+	 // }
+
+	 // var fn1=obj.fn;
+	 // fn1.call(obj);//冒充obj调用它
+	 
+	 //  var obj={
+	 // 	x:10,
+	 // 	fn:function(){
+	 // 		function f(){
+	 // 			console.log(this);//window对象
+		//  		console.log(this.x);//undefined
+	 // 		}
+	 // 		f();
+	 // 	}
+	 // }
+
+	 // obj.fn();
+	 // 
+	 // function Fn(){
+	 // 	this.name="aaaa";
+	 // 	this.age=11
+	 // }
+
+	 // Fn.prototype.getName=function(){
+	 // 	console.log(this);//返回Fn()整个函数本身
+	 // 	console.log(this.name);//返回this.name的值
+	 // }
+
+	 // var f1=new Fn();
+	 // f1.getName();
+	 // 上下文栈的压栈、出栈过程：
+	 
+	 var a=10,
+		 fn,
+		 bar=function(x){
+		 	var b=5;
+		 	fn(x+b);//fn(15)，全局变量bar=fn(15){console.log(15+5)}
+		 };
+		fn=function(y){ //15
+			var c=5;
+			console.log(y+c);//20
+		}
+
+		bar(10);//window调用
+	</script>
+</body>
+</html>
